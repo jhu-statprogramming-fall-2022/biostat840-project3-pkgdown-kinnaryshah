@@ -1,0 +1,110 @@
+---
+title: "How to do stuff"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to do stuff}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This tidytuesday dataset is about chocolate bar ratings. I want to analyze the distribution of the ratings over time. The data and dictionary are available here: <https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-01-18/readme.md>
+
+```{r setup}
+library(wesanderson)
+library(tidyverse)
+library(tidytuesdayR)
+library(ggplot2)
+library(here)
+library(lubridate)
+
+
+```
+
+```{r, message=FALSE}
+if(!file.exists(here("data","tuesdata_chocolate.RDS"))){
+  tuesdata <- tidytuesdayR::tt_load('2022-01-18')
+  chocolate <- tuesdata$choc
+  
+  # save the files to RDS objects
+  saveRDS(tuesdata$chocolate, file= here("data","tuesdata_chocolate.RDS"))
+}
+
+
+```
+
+```{r, eval=TRUE, message=FALSE}
+
+chocolate <- readRDS(here("data","tuesdata_chocolate.RDS"))
+chocolate <- chocolate %>% 
+  filter(!is.na(ingredients))
+chocolate$cocoa_percent <- map(chocolate$cocoa_percent, function(x) str_sub(x,1,nchar(x)-1))
+chocolate$cocoa_percent <- map_int(chocolate$cocoa_percent, function(x) as.integer(x))
+chocolate <- chocolate %>%
+  mutate(country_of_bean_origin = str_to_upper(country_of_bean_origin))
+
+mean_ratings <- chocolate %>% 
+  group_by(review_date) %>%
+  summarize(mean_rating = mean(rating))
+
+total_ratings <- chocolate %>% 
+  group_by(review_date) %>%
+  summarize(total_rating = n())
+
+```
+
+```{r, eval=TRUE, message=FALSE}
+  
+ggplot(data = mean_ratings, aes(x=review_date, y=mean_rating)) +
+  geom_point() +
+  ylim(c(0,5)) +
+  labs(title = "Mean Rating over Time", subtitle = "ratings stay relatively constant around 3-3.5", caption = "Figure 1") +
+  xlab("Year") + ylab("Mean Rating") +
+  theme_bw()
+
+```
+
+```{r, eval=TRUE, message=FALSE}
+  
+pal <- wes_palette("Royal1")
+
+ggplot(data = total_ratings, aes(x=review_date, y=total_rating)) +
+  geom_point() +
+  geom_line(color=rep(pal,4)) +
+  ylim(c(0,300)) +
+  labs(title = "Total Ratings per Year over Time", subtitle = "ratings fluctuate over time, peaking in 2015", caption = "Figure 2") +
+  xlab("Year") + ylab("Number of Ratings") +
+  theme_bw()
+
+```
+
+```{r, eval=TRUE, message=FALSE}
+
+pal <- wes_palette("Darjeeling1")
+
+ggplot(chocolate, aes(x = rating, fill = review_date)) + 
+  geom_density() + 
+  facet_wrap(~ review_date) + 
+  theme_bw() +
+  labs(title = "Rating Density over Time", subtitle = "this plot shows the variation in reviews across years", caption = "Figure 3") +
+  xlab("Rating") + ylab("Density") +
+  theme(legend.position="none",
+      strip.background=element_rect(color=pal[5],
+                                    fill=pal[3]))
+
+```
+
+The plots show that the mean of the ratings stay relatively constant over time, while the number of ratings per fluctuates over time. Accordingly, the spread of the ratings each year is quite variable.
+
+For grading:
+
+1.  purrr: map, map_int
+2.  formatting functions: filter, str_sub, str_to_upper, mutate, group_by, summarize
+3.  geom_point, geom_line, geom_density
+

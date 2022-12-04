@@ -1,4 +1,17 @@
 url: ~
 template:
   bootstrap: 5
+  bootswatch: pulse
+  bslib:
+    pkgdown-nav-height: 150px
 
+  theme: oblivion
+  navbar:
+    bg: primary
+
+  footer:
+  structure:
+    left: pkgdown
+    right: [authors, legal]
+  components:
+    legal: Provided without **any warranty**.

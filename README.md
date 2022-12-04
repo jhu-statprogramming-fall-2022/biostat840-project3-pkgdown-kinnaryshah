@@ -1,24 +1,42 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Wes Anderson Palettes
-=====================
+
+# Wes Anderson Palettes
 
 [![Build
-Status](https://travis-ci.org/karthik/wesanderson.png)](https://travis-ci.org/karthik/wesanderson)  
+Status](https://travis-ci.org/karthik/wesanderson.png)](https://travis-ci.org/karthik/wesanderson)\
 ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/wesanderson)
 
 ![](rushmore.jpg)
+
+Assignment Details:
+
+-   <https://github.com/karthik/wesanderson>
+
+-   [https://jhu-statprogramming-fall-2022.github.io/biostat840-project3-pkgdown-](https://jhu-statprogramming-fall-2022.github.io/biostat840-project3-pkgdown-%3Cyour_github_username)[kinnaryshah](https://jhu-statprogramming-fall-2022.github.io/biostat840-project3-pkgdown-kinnaryshah)
+
+-   customizations: added theme pulse, changed the navigation bar
+    height, changed syntax highlighting in code blocks, changed
+    navigation bar color, changed footer structure
+
+-   The author of this project is Kinnary Shah, and the author of the
+    original package is Karthik Ram.
 
 > I saved you from boring plots. What did you ever do? - Max Fischer
 > (probably)
 
 Tired of generic mass produced palettes for your plots? Short of adding
-an owl and dressing up your plot in a bowler hat, here’s the most indie
+an owl and dressing up your plot in a bowler hat, here's the most indie
 thing you can do to one. First round of palettes derived from the
 amazing Tumblr blog [Wes Anderson
-Palettes.](http://wesandersonpalettes.tumblr.com/)
+Palettes](http://wesandersonpalettes.tumblr.com/) by user karthik.
 
-Installation
-------------
+## Installation
 
 ``` r
 install.packages("wesanderson")
@@ -30,8 +48,7 @@ install.packages("wesanderson")
 devtools::install_github("karthik/wesanderson")
 ```
 
-Usage
------
+## Usage
 
 ``` r
 library("wesanderson")
@@ -45,8 +62,7 @@ names(wes_palettes)
 #> [17] "GrandBudapest2" "IsleofDogs1"    "IsleofDogs2"
 ```
 
-Palettes
---------
+## Palettes
 
 ### Bottle Rocket (1996)
 
@@ -206,8 +222,7 @@ wes_palette("IsleofDogs2")
 
 ![](figure/isleofdogs-2.png)
 
-As seen in these publications
------------------------------
+## As seen in these publications
 
 -   [The environmental niche of the global high seas pelagic longline
     fleet](http://advances.sciencemag.org/content/4/8/eaat3681) Science
@@ -217,7 +232,7 @@ As seen in these publications
 
 ![Imgur](https://i.imgur.com/3Ztc5Qa.png)
 
--   [Lopus, S., & Frye, M. (2018). Visualizing Africa’s Educational
+-   [Lopus, S., & Frye, M. (2018). Visualizing Africa's Educational
     Gender Gap. Socius: Sociological Research for a Dynamic World, 4,
     237802311879595](http://journals.sagepub.com/doi/full/10.1177/2378023118795956)
 
