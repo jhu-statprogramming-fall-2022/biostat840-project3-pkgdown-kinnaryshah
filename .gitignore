@@ -6,7 +6,6 @@ Makefile
 .Rhistory
 .RData
 screenshots/
-docs
 .Rdata
 .httr-oauth
 .DS_Store
